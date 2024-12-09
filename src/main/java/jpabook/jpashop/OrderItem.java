@@ -1,9 +1,6 @@
 package jpabook.jpashop;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import javax.annotation.processing.Generated;
 
@@ -13,13 +10,17 @@ public class OrderItem {
     @Id @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
+//    @Column(name = "ORDER_ID")
+//    private Long orderId;
 
-    @Column(name = "ITEM_ID")
-    private Long item_Id;
-
-    @Column(name = "ORDER_ID")
-    private Long orderId;
-
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID")
+    private Item item;
+//    @Column(name = "ITEM_ID")
+//    private Long item_Id;
     private int orderPrice;
 
     private int itemId;
@@ -30,22 +31,6 @@ public class OrderItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getItem_Id() {
-        return item_Id;
-    }
-
-    public void setItem_Id(Long item_Id) {
-        this.item_Id = item_Id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
     }
 
     public int getOrderPrice() {
@@ -62,5 +47,13 @@ public class OrderItem {
 
     public void setItemId(int itemId) {
         this.itemId = itemId;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

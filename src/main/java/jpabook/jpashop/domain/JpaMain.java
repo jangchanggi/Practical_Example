@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import jpabook.jpashop.Order;
+import jpabook.jpashop.OrderItem;
 
 import java.util.List;
 
@@ -18,6 +20,13 @@ public class JpaMain {
         tx.begin();
 
         try{
+            Order order = new Order();
+            //order.addOrderItem(new OrderItem());
+
+            OrderItem orderItem= new OrderItem();
+            orderItem.setOrder(order);
+
+            em.persist(orderItem);
 
             tx.commit();
         } catch (Exception e) {
